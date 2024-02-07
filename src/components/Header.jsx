@@ -1,6 +1,26 @@
-import { Link } from "react-router-dom";
+
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
+  const navigations = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "Products",
+      path: "/products"
+    },
+    {
+      name: "About",
+      path: "/about"
+    },
+    {
+      name: "Contact",
+      path: "/contact"
+    }
+  ]
+
   return (
     <>
       <header className="text-gray-600 body-font shadow-lg">
@@ -21,12 +41,17 @@ const Header = () => {
             <span className="ml-3 text-xl">Bright Store</span>
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a className="mr-5 hover:text-gray-900">First Link</a>
-            <a className="mr-5 hover:text-gray-900">Second Link</a>
-            <a className="mr-5 hover:text-gray-900">Third Link</a>
-            <a className="mr-5 hover:text-gray-900">Fourth Link</a>
+            {
+              navigations.map((item, index)=> {
+                return (
+                  <NavLink to={item.path} key={index} className="mr-5 hover:text-gray-900">
+                    {item.name}
+                  </NavLink>
+                )
+              })
+            }
           </nav>
-          <button className="inline-flex items-center text-white bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0">
+          <Link to="/cart" className="inline-flex items-center text-white bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0">
             Cart
             <svg
               fill="none"
@@ -39,7 +64,7 @@ const Header = () => {
             >
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </header>
     </>

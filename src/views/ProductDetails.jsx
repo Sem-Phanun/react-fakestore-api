@@ -1,9 +1,10 @@
 import { data } from "autoprefixer";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   console.log(id, "id");
   const [product, setProduct] = useState({});
   useEffect(() => {
@@ -14,9 +15,32 @@ const ProductDetails = () => {
   const getSingleProduct = async () => {
     const res = await axios.get(`https://fakestoreapi.com/products/${id}`);
     const data = res.data;
-    console.log(data);
     setProduct(data);
   };
+
+  const handleCart = (product, redirect) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || []
+    const isProductExist = cart.find(item => item.id == product.id)
+
+    if (isProductExist) {
+      const updateCart = cart.map(item => {
+        if(item.id === product.id){
+          return {
+            ...item,
+            quantity: item.quantity +1
+          }
+        }
+        return item
+      })
+      localStorage.setItem("cart",JSON.stringify(updateCart))
+    }else {
+      localStorage.setItem("cart", JSON.stringify([...cart, {quantity: 1}]))
+    }
+    alert("Add to cart")
+    if(redirect){
+      navigate("/cart")
+    }
+  }
 
   return (
     <>
@@ -173,10 +197,14 @@ const ProductDetails = () => {
                   ${product?.price}
                 </span>
                 <div className="flex ml-4">
-                  <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                  <button 
+                    onClick={()=> handleCart(product, true)}
+                    className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                     Buy Now
                   </button>
-                  <button className="text-white ml-2 bg-gray-500 border-0 py-2 px-6 focus:outline-none rounded">
+                  <button 
+                    onClick={()=> handleCart(product)}
+                    className="text-white ml-2 bg-gray-500 border-0 py-2 px-6 focus:outline-none rounded">
                     Add to Cart
                   </button>
                 </div>

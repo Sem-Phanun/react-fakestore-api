@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 
-const Proudct = ({ products =[] }) => {
+const ProductCard = ({ products =[] }) => {
   return (
     <>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap item-center justify-center">
+        <div className="container px-2 py-20 mx-auto">
+          <div className="flex flex-wrap item-center justify-center -m-6">
             {products.map((item, index) => {
                 const { id } = item
               return (
-                <div className="lg:w-1/4 md:w-1/2 p-4 w-full border border-opacity-50" key={index}>
+                <div className="lg:w-1/4 md:w-1/2 p-4 w-full border border-opacity-50 m-2" key={index}>
                   <Link to={`/product/${id}`} className="block relative h-48 rounded overflow-hidden">
                     <img
                       alt={item.title}
@@ -36,4 +36,4 @@ const Proudct = ({ products =[] }) => {
   );
 };
 
-export default Proudct;
+export default ProductCard;
