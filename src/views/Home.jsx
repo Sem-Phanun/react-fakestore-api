@@ -5,6 +5,7 @@ import ProductCard from "../components/ProductCard";
 import State from "../components/State";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ProductLoading from "../components/ProductLoading";
 const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -22,7 +23,10 @@ const Home = () => {
       <Categories/>
       
       {
-        products.length > 0 && <ProductCard products={products}/>
+        products.length > 0 ? 
+        <ProductCard products={products}/>
+        : 
+        <ProductLoading/>
       }
       <State />
     </>

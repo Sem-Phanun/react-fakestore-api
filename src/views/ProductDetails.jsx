@@ -19,11 +19,11 @@ const ProductDetails = () => {
   };
 
   const handleCart = (product, redirect) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || []
-    const isProductExist = cart.find(item => item.id == product.id)
+    const carts = JSON.parse(localStorage.getItem("cart")) || []
+    const isProductExist = carts.find(item => item.id == product.id)
 
     if (isProductExist) {
-      const updateCart = cart.map(item => {
+      const updateCart = carts.map(item => {
         if(item.id === product.id){
           return {
             ...item,
@@ -34,7 +34,7 @@ const ProductDetails = () => {
       })
       localStorage.setItem("cart",JSON.stringify(updateCart))
     }else {
-      localStorage.setItem("cart", JSON.stringify([...cart, {quantity: 1}]))
+      localStorage.setItem("cart", JSON.stringify([...carts, {product, quantity: 1}]))
     }
     alert("Add to cart")
     if(redirect){
