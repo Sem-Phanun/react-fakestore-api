@@ -5,7 +5,7 @@ const ProductCard = ({ products =[] }) => {
     <>
       <section className="text-gray-600 body-font">
         <div className="container px-2 py-20 mx-auto">
-          <div className="flex flex-wrap item-center justify-center -m-6">
+          <div className="flex flex-wrap item-center justify-center m-6">
             {products.map((item, index) => {
                 const { id } = item
               return (

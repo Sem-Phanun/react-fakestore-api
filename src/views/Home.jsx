@@ -1,5 +1,4 @@
 import Categories from "../components/Categories";
-import FeatureCard from "../components/FeatureCard";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import State from "../components/State";

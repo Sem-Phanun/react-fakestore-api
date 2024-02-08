@@ -1,13 +1,18 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const navigate = useNavigate()
+  const [total, setTotal] = useState(0)
   const carts = JSON.parse(localStorage.getItem("cart")) || [];
 
-  if (!carts.length) {
-    return <div>Cart is Empty</div>
-  }
-
+  useEffect(()=> {
+    const total = carts.reduce((acc, item) => {
+      return acc + (item.price * item.quantity)
+    },0)
+    setTotal(total)
+  },[])
+  
   const handleIncrement = (id) => {
     const updateCart = carts.map(item => {
       if(item.id === id){
@@ -37,10 +42,14 @@ const Cart = () => {
   }
 
 
-  const removeProduct = () => {
+  const removeProduct = (id) => {
     const updateCart = carts.filter(item => item.id !== id)
     localStorage.setItem("cart", JSON.stringify(updateCart))
     navigate("/cart")
+  }
+
+  if(carts.length === 0){
+    return <div className="h-[55vh] flex items-center text-4xl justify-center">Cart is Empty</div>
   }
   return (
     <>
@@ -55,13 +64,13 @@ const Cart = () => {
               <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
                 Product Details
               </h3>
-              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
                 Quantity
               </h3>
-              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5r">
                 Price
               </h3>
-              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+              <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
                 Total
               </h3>
             </div>
@@ -72,11 +81,10 @@ const Cart = () => {
                   key={index}
                 >
                   <div className="flex w-2/5">
-                    <div className="w-20">
+                    <div className="w-20 h-6">
                       <img
-                        className="h-24"
+                        className="h-full"
                         src={item?.image}
-                        alt=""
                       />
                     </div>
                     <div className="flex flex-col justify-between ml-4 flex-grow">
@@ -142,8 +150,8 @@ const Cart = () => {
               Order Summary
             </h1>
             <div className="flex justify-between mt-10 mb-5">
-              <span className="font-semibold text-sm uppercase">Items 3</span>
-              <span className="font-semibold text-sm">590$</span>
+              <span className="font-semibold text-sm uppercase">Items {carts?.length}</span>
+              <span className="font-semibold text-sm">${total.toFixed(2)}</span>
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -173,7 +181,7 @@ const Cart = () => {
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>${(total + 10).toFixed((2))}</span>
               </div>
               <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                 Checkout
