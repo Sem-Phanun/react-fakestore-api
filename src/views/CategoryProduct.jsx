@@ -18,7 +18,11 @@ const CategoryProduct = () => {
         setCategory(data)
     }
   return (
-    <ProductCard products={cateogry}/>
+    
+    <>
+      <h1 className="text-center text-black">Product List</h1>
+      <ProductCard products={cateogry}/>
+    </>
   )
 }
 

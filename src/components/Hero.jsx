@@ -28,7 +28,7 @@ const Hero = () => {
             <img
               className="object-cover object-center rounded"
               alt="hero"
-              src="https://dummyimage.com/720x600"
+              src="https://img.freepik.com/free-photo/abstract-blur-shopping-mall_1203-8484.jpg?size=626&ext=jpg&ga=GA1.1.691160924.1707410118&semt=sph"
             />
           </div>
         </div>

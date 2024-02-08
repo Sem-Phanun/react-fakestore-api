@@ -6,12 +6,11 @@ const NotFound = () => {
       <div className="bg-white py-6 sm:py-0">
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="grid gap-8 sm:grid-cols-2 sm:gap-12">
-            <div className="h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg sm:rounded-none sm:shadow-none md:h-auto">
+            <div className="overflow-hidden rounded-lg shadow-lg sm:rounded-none sm:shadow-none md:h-auto">
               <img
-                src="https://images.unsplash.com/photo-1452022449339-59005948ec5b?auto=format&q=75&fit=crop&w=600"
+                src="https://img.freepik.com/free-vector/error-404-concept-landing-page_52683-11371.jpg?size=626&ext=jpg&ga=GA1.1.691160924.1707410118&semt=ais"
                 loading="lazy"
-                alt="Photo by Jeremy Cai"
-                className="h-full w-full object-cover object-center"
+                className="h-full w-full object-contain object-center"
               />
             </div>
 
