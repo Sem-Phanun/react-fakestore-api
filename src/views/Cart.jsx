@@ -81,7 +81,7 @@ const Cart = () => {
                   key={index}
                 >
                   <div className="flex w-2/5">
-                    <div className="w-20 h-6">
+                    <div className="w-20">
                       <img
                         className="h-full"
                         src={item?.image}

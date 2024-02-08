@@ -20,7 +20,6 @@ const CategoryProduct = () => {
   return (
     
     <>
-      <h1 className="text-center text-black">Product List</h1>
       <ProductCard products={cateogry}/>
     </>
   )
