@@ -34,7 +34,7 @@ const ProductDetails = () => {
       })
       localStorage.setItem("cart",JSON.stringify(updateCart))
     }else {
-      localStorage.setItem("cart", JSON.stringify([...carts, {product, quantity: 1}]))
+      localStorage.setItem("cart", JSON.stringify([...carts, {...product, quantity: 1}]))
     }
     alert("Add to cart")
     if(redirect){
